@@ -88,6 +88,7 @@ def test(model, device, test_loader):
             100.0 * correct / len(test_loader.dataset),
         )
     )
+    fact_table.append(("correct", correct))
 
 
 def main():
@@ -182,6 +183,12 @@ def main():
         test(model, device, test_loader)
         scheduler.step()
 
+    # Let's now visualize the results
+
 
 if __name__ == "__main__":
+    fact_table = []
     main()
+    print(fact_table)
+    correct = [y for _, y in fact_table]
+    print(correct)
