@@ -67,7 +67,7 @@ def test(model, device, test_loader):
     test_loss = 0
     correct = 0
     with torch.no_grad():
-        for data, target in test_loader:
+        for i, (data, target) in enumerate(test_loader):
             data, target = data.to(device), target.to(device)
             output = model(data)
             test_loss += F.nll_loss(
@@ -77,7 +77,8 @@ def test(model, device, test_loader):
                 dim=1, keepdim=True
             )  # get the index of the max log-probability
             correct += pred.eq(target.view_as(pred)).sum().item()
-
+        print("logging final batch", flor.log('test-batch', flor.pkl(data)))
+        print("logging final predictions", flor.log('preds', flor.pkl(pred)))
     test_loss /= len(test_loader.dataset)
 
     print(
