@@ -54,7 +54,7 @@ def train(args, model, device, train_loader, optimizer, epoch):
                         batch_idx * len(data),
                         len(train_loader.dataset),
                         100.0 * batch_idx / len(train_loader),
-                        flor.pin('loss', loss.item()),
+                        flor.log('loss', loss.item()),
                     )
                 )
                 if args.dry_run:
@@ -85,7 +85,7 @@ def test(model, device, test_loader):
             test_loss,
             correct,
             len(test_loader.dataset),
-            flor.pin('acc', 100.0 * correct / len(test_loader.dataset)),
+            flor.log('acc', 100.0 * flor.log('correct', correct) / len(test_loader.dataset)),
         )
     )
 
