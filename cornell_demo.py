@@ -85,7 +85,7 @@ def test(model, device, test_loader):
             test_loss,
             correct,
             len(test_loader.dataset),
-            flor.log('acc', 100.0 * correct / len(test_loader.dataset)),
+            flor.log('acc', 100.0 * flor.log('correct', correct) / len(test_loader.dataset)),
         )
     )
 
